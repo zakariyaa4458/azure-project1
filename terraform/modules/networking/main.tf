@@ -16,10 +16,6 @@ resource "azurerm_virtual_network" "azure_vnet" {
 
 }
 
-import {
-  id = "/subscriptions/2930bc1b-5d66-43da-9d15-54c0b439b62c/resourceGroups/rg-azure-project1"
-  to = azurerm_resource_group.rg-azure-project1
-}
 
 
 resource "azurerm_application_gateway" "azure_app_gateway" {
