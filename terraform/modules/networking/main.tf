@@ -10,7 +10,7 @@ resource "azurerm_virtual_network" "azure_vnet" {
   location            = azurerm_resource_group.rg-azure-project1.location
   resource_group_name = azurerm_resource_group.rg-azure-project1.name
   address_space       = ["10.0.0.0/16"]
-  dns_servers         = ["10.0.0.4", "10.0.0.5"]
+  dns_servers         = []
 
 
 
@@ -51,7 +51,7 @@ resource "azurerm_application_gateway" "azure_app_gateway" {
 
   frontend_port {
     name = local.frontend_port_name
-    port = 80
+    port = 443
   }
 
   frontend_ip_configuration {
