@@ -39,11 +39,19 @@ resource "azurerm_container_app" "azure_flask_app" {
 
     }
     container {
-      name   = "examplecontainerapp"
-      image  = "mcr.microsoft.com/k8se/quickstart:latest"
+      name   = "flask-app"
+      image  = "flaskapp1.azurecr.io/flaskapp:374eef65603dd8c081dbbe3df20650543fda3036"
       cpu    = 0.25
       memory = "0.5Gi"
     }
+
+    
+  }
+
+  lifecycle {
+    ignore_changes = [
+      template[0].container[0].image
+    ]
   }
 
 }
