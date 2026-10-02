@@ -11,7 +11,9 @@ on:
 
   workflow_dispatch: 
 
-
+concurrency:
+  group: terraform-azure
+  cancel-in-progress: false
   
 jobs:
   terraform:
