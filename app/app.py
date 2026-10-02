@@ -4,6 +4,7 @@ from flask import Flask, request, jsonify, abort, render_template
 app = Flask(__name__, template_folder='templates', static_folder='static')
 
 # In-memory storage for tasks
+
 tasks = {}
 
 @app.route('/')
