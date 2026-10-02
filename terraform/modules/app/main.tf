@@ -52,6 +52,7 @@ resource "azurerm_container_app_environment" "azure_flask_container_app_environm
   name                       = "Example-Environment"
   location                   = var.rg_azure_project1_location
   resource_group_name        = var.rg_azure_project1_name
+  logs_destination = "log-analytics"
   log_analytics_workspace_id = var.azure_log_analytics_workspace_id
 
   infrastructure_subnet_id = var.container_subnet_id
