@@ -57,7 +57,7 @@ resource "azurerm_container_app" "azure_flask_app" {
 }
 
 resource "azurerm_container_app_environment" "azure_flask_container_app_environment" {
-  name                       = "Example-Environment"
+  name                       = "azure-flask-container-app-environment"
   location                   = var.rg_azure_project1_location
   resource_group_name        = var.rg_azure_project1_name
   logs_destination = "log-analytics"
