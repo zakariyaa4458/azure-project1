@@ -1,0 +1,67 @@
+name:  infrastructure pipeline
+
+run-name: Infrastructure Pipeline by ${{ github.actor }} 
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - terraform/**
+
+  workflow_dispatch: 
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  terraform:
+    name: Terraform
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: terraform
+    steps:
+
+      - name: Checkout code
+        uses: actions/checkout@v5
+
+      - name: Azure Login
+        uses: azure/login@v3
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v4
+        with:
+          terraform_version: 1.7.6
+
+      - name: Terraform Init
+        working-directory: terraform
+        run: terraform init
+
+      - name: Terraform fmt
+        working-directory: terraform
+        run: terraform fmt
+
+      - name: tflint
+        uses: terraform-linters/setup-tflint@v4
+
+      - name: run checkov
+        uses: bridgecrewio/checkov-action@master
+       # with:
+        #  hard_fail_on: 
+
+      - name: Terraform Validate
+        run: terraform validate
+
+      - name: Terraform Plan
+        run: terraform plan
+
+      - name: Terraform Apply
+        if: github.ref == 'refs/heads/main'
+        run: terraform apply -auto-approve
