@@ -10,7 +10,7 @@ on:
       - app/**
   
   workflow_dispatch:
-  
+
 permissions:
   contents: read
   id-token: write
@@ -56,3 +56,11 @@ jobs:
       - name: Push image
         run: |
                docker push ${{ env.ACR_NAME }}.azurecr.io/${{ env.IMAGE_NAME }}:${{ github.sha }}
+          
+
+      - name: Deploy to Azure Container Apps
+        run: |
+                az containerapp update \
+                --name azure-flask-app \
+                --resource-group rg-azure-project1 \
+                --image ${{ env.ACR_NAME }}.azurecr.io/${{ env.IMAGE_NAME }}:${{ github.sha }}
