@@ -3,6 +3,7 @@ resource "azurerm_container_registry" "acr_flaskapp" {
   # checkov:skip=CKV_AZURE_164: 
   # checkov:skip=CKV_AZURE_237: I am not using premium sku for this project, so I will not enable it.
   # checkov:skip=CKV_AZURE_139: disabling public network causes networking issues for aca
+  # checkov:skip=CKV_AZURE_166:im using trivy to scan images
   name                = "flaskapp1"
   resource_group_name = var.rg_azure_project1_name
   location            = var.rg_azure_project1_location
@@ -12,7 +13,7 @@ resource "azurerm_container_registry" "acr_flaskapp" {
   zone_redundancy_enabled = true
   retention_policy_in_days = 90
 
-  quarantine_policy_enabled = true
+  quarantine_policy_enabled = false
    
 }
 
