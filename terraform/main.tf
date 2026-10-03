@@ -9,10 +9,10 @@ module "app" {
   acr_pull_role_assignment         = module.acr.acr_pull_role_assignment.id
 
 
- # depends_on = [
+  # depends_on = [
   #  module.acr
   #]
- 
+
 
 }
 

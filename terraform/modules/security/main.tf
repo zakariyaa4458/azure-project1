@@ -63,6 +63,22 @@ resource "azurerm_network_security_rule" "azure_public_nsg_rule_2" {
   network_security_group_name = azurerm_network_security_group.azure_public_nsg.name
 }
 
+resource "azurerm_network_security_rule" "azure_public_app_gateway_infrastructure" {
+  name                        = "Allow-GatewayManager"
+  priority                    = 120
+  direction                   = "Inbound"
+  access                      = "Allow"
+  protocol                    = "Tcp"
+
+  source_port_range           = "*"
+  destination_port_range      = "65200-65535"
+
+  source_address_prefix       = "GatewayManager"
+  destination_address_prefix  = "*"
+
+  resource_group_name         = var.rg_azure_project1_name
+  network_security_group_name = azurerm_network_security_group.azure_public_nsg.name
+}
 
 resource "azurerm_network_security_rule" "azure_private_nsg_rule" {
   name                        = "azure-private-nsg-rule"
