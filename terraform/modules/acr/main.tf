@@ -16,9 +16,11 @@ resource "azurerm_container_registry" "acr_flaskapp" {
    
 }
 
+
+
 resource "azurerm_role_assignment" "acr_pull" {
   scope                = azurerm_container_registry.acr_flaskapp.id
   role_definition_name = "AcrPull"
-  principal_id         = var.container_app_principal_id
-
+  principal_id         = var.aca_identity_id
 }
+

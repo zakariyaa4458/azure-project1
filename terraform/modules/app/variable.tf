@@ -28,3 +28,13 @@ variable "container_registry_login_server" {
   description = "The login server of the Azure Container Registry."
   type        = string
 }
+
+variable "acr_pull_role_assignment" {
+  description = "The role assignment for the Azure Container Registry pull role."
+  type        = string
+}
+
+#variable "aca_identity_id" {
+ # description = "The ID of the user-assigned identity for the Azure Container App."
+  #type        = string
+#}

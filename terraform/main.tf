@@ -6,6 +6,14 @@ module "app" {
   vnet_id                          = module.networking.vnet_id
   container_subnet_id              = module.networking.container_subnet_id
   container_registry_login_server  = module.acr.container_registry_login_server
+  acr_pull_role_assignment         = module.acr.acr_pull_role_assignment.id
+
+
+  depends_on = [
+    module.acr
+  ]
+ 
+
 }
 
 module "networking" {
@@ -37,6 +45,7 @@ module "acr" {
   rg_azure_project1_location = module.networking.rg_azure_project1_location
   vnet_id                    = module.networking.vnet_id
   container_app_principal_id = module.app.container_app_principal_id
+  aca_identity_id            = module.app.aca_identity_id
 
 }
 

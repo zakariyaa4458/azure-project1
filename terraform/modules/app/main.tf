@@ -8,15 +8,19 @@ resource "azurerm_container_app" "azure_flask_app" {
 
 
   identity {
-    type = "SystemAssigned"
+    type = "UserAssigned"
+
+    identity_ids = [
+    azurerm_user_assigned_identity.aca_identity.id
+  ]
   }
 
   registry {
     server   = var.container_registry_login_server
-    identity = "System"
+    identity = azurerm_user_assigned_identity.aca_identity.id
   }
 
-
+ 
   ingress {
     external_enabled = true
     target_port      = 3000
@@ -65,3 +69,10 @@ resource "azurerm_container_app_environment" "azure_flask_container_app_environm
 
   infrastructure_subnet_id = var.container_subnet_id
 }
+
+resource "azurerm_user_assigned_identity" "aca_identity" {
+  name                = "azure-flask-app-identity"
+  location            = var.rg_azure_project1_location
+  resource_group_name = var.rg_azure_project1_name
+}
+

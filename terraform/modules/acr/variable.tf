@@ -18,3 +18,8 @@ variable "container_app_principal_id" {
   description = "The principal ID of the container app."
   type        = string
 }
+
+variable "aca_identity_id" {
+ description = "The ID of the user-assigned identity for the Azure Container App."
+  type        = string
+}
