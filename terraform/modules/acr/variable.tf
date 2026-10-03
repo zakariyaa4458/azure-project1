@@ -33,3 +33,8 @@ variable "app_gateway_kv_id" {
   description = "The ID of the Azure Key Vault."
   type        = string
 }
+
+variable "application_gateway_identity_principal_id" {
+    description = "app gateway identity principal id"
+  type = string
+}

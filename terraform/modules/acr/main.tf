@@ -28,5 +28,5 @@ resource "azurerm_role_assignment" "acr_pull" {
 resource "azurerm_role_assignment" "app_gateway_key_vault" {
   scope                = var.app_gateway_kv_id
   role_definition_name = "Key Vault Secrets User"
-  principal_id         = var.aca_identity_principal_id
+  principal_id         = var.application_gateway_identity_principal_id
 }

@@ -17,12 +17,12 @@ module "app" {
 }
 
 module "networking" {
-  source             = "./modules/networking"
-  container_app_fqdn = module.app.container_app_fqdn
-  app_gateway_kv_id = module.security.app_gateway_kv_id
-  key_vault_secret_id = var.key_vault_secret_id
-  application_gateway_identity_id = module.app.application_gateway_identity_id.id
-  
+  source                          = "./modules/networking"
+  container_app_fqdn              = module.app.container_app_fqdn
+  app_gateway_kv_id               = module.security.app_gateway_kv_id
+  key_vault_secret_id             = var.key_vault_secret_id
+ application_gateway_identity_id = module.app.application_gateway_identity_id
+
 
 
 }
@@ -47,15 +47,15 @@ module "logs" {
 }
 
 module "acr" {
-  source                     = "./modules/acr"
-  rg_azure_project1_name     = module.networking.rg_azure_project1_name
-  rg_azure_project1_location = module.networking.rg_azure_project1_location
-  vnet_id                    = module.networking.vnet_id
-  container_app_principal_id = module.app.container_app_principal_id
-  aca_identity_id            = module.app.aca_identity_id
-  aca_identity_principal_id  = module.app.aca_identity_principal_id
-  app_gateway_kv_id          = module.security.app_gateway_kv_id
-
+  source                          = "./modules/acr"
+  rg_azure_project1_name          = module.networking.rg_azure_project1_name
+  rg_azure_project1_location      = module.networking.rg_azure_project1_location
+  vnet_id                         = module.networking.vnet_id
+  container_app_principal_id      = module.app.container_app_principal_id
+  aca_identity_id                 = module.app.aca_identity_id
+  aca_identity_principal_id       = module.app.aca_identity_principal_id
+  app_gateway_kv_id               = module.security.app_gateway_kv_id
+  application_gateway_identity_principal_id = module.app.application_gateway_identity_principal_id
 
 }
 

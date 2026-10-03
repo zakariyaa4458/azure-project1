@@ -4,6 +4,6 @@ variable "tenant_id" {
 }
 
 variable "key_vault_secret_id" {
-    description = "key vault secret https uri"
-    type        =  string 
+  description = "key vault secret https uri"
+  type        = string
 }
