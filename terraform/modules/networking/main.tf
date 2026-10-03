@@ -48,7 +48,7 @@ firewall_policy_id    = azurerm_web_application_firewall_policy.azure_waf_policy
 
   frontend_port {
     name = local.frontend_port_name
-    port = 80
+    port = 443
   }
 
   frontend_ip_configuration {
@@ -79,7 +79,9 @@ firewall_policy_id    = azurerm_web_application_firewall_policy.azure_waf_policy
     name                           = local.listener_name
     frontend_ip_configuration_name = local.frontend_ip_configuration_name
     frontend_port_name             = local.frontend_port_name
-    protocol                       = "Http"
+    protocol                       = "Https"
+
+    ssl_certificate_name = "cloudflare-origin-cert"
   }
 
   request_routing_rule {
@@ -91,7 +93,18 @@ firewall_policy_id    = azurerm_web_application_firewall_policy.azure_waf_policy
     backend_http_settings_name = local.http_setting_name
   }
 
+identity {
+  type = "UserAssigned"
 
+  identity_ids = [
+    var.application_gateway_identity_id
+  ]
+}
+
+ssl_certificate {
+  name                = "cloudflare-origin-cert"
+  key_vault_secret_id = var.key_vault_secret_id
+}
 
 }
 

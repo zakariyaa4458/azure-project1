@@ -13,3 +13,8 @@ output "aca_identity_id" {
 output "aca_identity_principal_id" {
   value = azurerm_user_assigned_identity.aca_identity.principal_id
 }
+
+output "application_gateway_identity_id" {
+    value = azurerm_user_assigned_identity.application_gateway_identity
+  
+}

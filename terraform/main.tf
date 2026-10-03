@@ -19,6 +19,11 @@ module "app" {
 module "networking" {
   source             = "./modules/networking"
   container_app_fqdn = module.app.container_app_fqdn
+  app_gateway_kv_id = module.security.app_gateway_kv_id
+  key_vault_secret_id = var.key_vault_secret_id
+  application_gateway_identity_id = module.app.application_gateway_identity_id.id
+  
+
 
 }
 
@@ -50,6 +55,7 @@ module "acr" {
   aca_identity_id            = module.app.aca_identity_id
   aca_identity_principal_id  = module.app.aca_identity_principal_id
   app_gateway_kv_id          = module.security.app_gateway_kv_id
+
 
 }
 
