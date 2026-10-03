@@ -12,8 +12,6 @@ module "networking" {
   source             = "./modules/networking"
   container_app_fqdn = module.app.container_app_fqdn
 
-
-
 }
 
 module "security" {
