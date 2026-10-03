@@ -40,7 +40,7 @@ resource "azurerm_container_app" "azure_flask_app" {
     }
     container {
       name   = "flask-app"
-      image  = "flaskapp1.azurecr.io/flaskapp:374eef65603dd8c081dbbe3df20650543fda3036"
+      image  = "flaskapp1.azurecr.io/flaskapp:1191287f8fdeb619760846a323672d58b1b19d2c"
       cpu    = 0.25
       memory = "0.5Gi"
     }
