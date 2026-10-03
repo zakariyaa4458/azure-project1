@@ -20,6 +20,7 @@ resource "azurerm_application_gateway" "azure_app_gateway" {
   name                = "azure-app-gateway"
   resource_group_name = azurerm_resource_group.rg-azure-project1.name
   location            = azurerm_resource_group.rg-azure-project1.location
+firewall_policy_id    = azurerm_web_application_firewall_policy.azure_waf_policy.id
 
   ssl_policy {
    
@@ -29,16 +30,13 @@ resource "azurerm_application_gateway" "azure_app_gateway" {
 
   }
 
-  waf_configuration {
-    enabled          = true
-    firewall_mode    = "Prevention"
-    rule_set_type    = "OWASP"
-    rule_set_version = "3.2"
-  }
+  
+
+ 
 
   sku {
-    name     = "Standard_v2"
-    tier     = "Standard_v2"
+    name     = "WAF_v2"
+    tier     = "WAF_v2"
     capacity = 2
   }
 
@@ -142,5 +140,23 @@ resource "azurerm_public_ip" "azure_public_ip" {
 
   tags = {
     environment = "Production"
+  }
+}
+
+resource "azurerm_web_application_firewall_policy" "azure_waf_policy" {
+  name                = "azure-waf-policy"
+  resource_group_name = azurerm_resource_group.rg-azure-project1.name
+  location            = azurerm_resource_group.rg-azure-project1.location
+
+  policy_settings {
+    enabled = true
+    mode    = "Prevention"
+  }
+
+  managed_rules {
+    managed_rule_set {
+      type    = "OWASP"
+      version = "3.2"
+    }
   }
 }
