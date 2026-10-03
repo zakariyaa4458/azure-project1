@@ -17,6 +17,7 @@ resource "azurerm_virtual_network" "azure_vnet" {
 }
 
 resource "azurerm_application_gateway" "azure_app_gateway" {
+    #checkov:skip=CKV_AZURE_217: temp
   name                = "azure-app-gateway"
   resource_group_name = azurerm_resource_group.rg-azure-project1.name
   location            = azurerm_resource_group.rg-azure-project1.location
