@@ -80,3 +80,8 @@ resource "azurerm_user_assigned_identity" "aca_identity" {
   resource_group_name = var.rg_azure_project1_name
 }
 
+resource "azurerm_user_assigned_identity" "application_gateway_identity" {
+  name                = "azure-application-gateway-identity"
+  location            = var.rg_azure_project1_location
+  resource_group_name = var.rg_azure_project1_name
+}

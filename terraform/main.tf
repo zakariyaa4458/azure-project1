@@ -31,6 +31,7 @@ module "security" {
   app_gateway_subnet_id           = module.networking.app_gateway_subnet_id
   container_subnet_address_prefix = module.networking.container_subnet_address_prefix
   tenant_id                       = var.tenant_id
+
 }
 
 module "logs" {
@@ -48,6 +49,7 @@ module "acr" {
   container_app_principal_id = module.app.container_app_principal_id
   aca_identity_id            = module.app.aca_identity_id
   aca_identity_principal_id  = module.app.aca_identity_principal_id
+  app_gateway_kv_id          = module.security.app_gateway_kv_id
 
 }
 
