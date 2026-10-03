@@ -45,7 +45,7 @@ resource "azurerm_container_app" "azure_flask_app" {
       memory = "0.5Gi"
     }
 
-    
+  
   }
 
   lifecycle {
