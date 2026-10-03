@@ -48,7 +48,6 @@ resource "azurerm_network_security_rule" "azure_public_nsg_rule" {
 }
 
 
-
 resource "azurerm_network_security_rule" "azure_public_nsg_rule_2" {
 # checkov:skip=CKV_AZURE_160:Port 80 is used only for HTTP-to-HTTPS redirection at Application Gateway
   name                        = "azure-public-nsg-rule-2"
