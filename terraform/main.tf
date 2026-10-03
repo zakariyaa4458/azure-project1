@@ -46,6 +46,7 @@ module "acr" {
   vnet_id                    = module.networking.vnet_id
   container_app_principal_id = module.app.container_app_principal_id
   aca_identity_id            = module.app.aca_identity_id
+  aca_identity_principal_id  = module.app.aca_identity_principal_id
 
 }
 
