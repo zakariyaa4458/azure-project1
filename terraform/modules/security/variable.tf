@@ -28,3 +28,8 @@ variable "container_subnet_address_prefix" {
   description = "The address prefix of the container subnet."
   type        = list(string)
 }
+
+variable "tenant_id" {
+  description = "The tenant ID for the Azure subscription."
+  type        = string
+}

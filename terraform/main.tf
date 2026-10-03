@@ -30,6 +30,7 @@ module "security" {
   container_subnet_id             = module.networking.container_subnet_id
   app_gateway_subnet_id           = module.networking.app_gateway_subnet_id
   container_subnet_address_prefix = module.networking.container_subnet_address_prefix
+  tenant_id                       = var.tenant_id
 }
 
 module "logs" {

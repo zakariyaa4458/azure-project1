@@ -93,3 +93,18 @@ resource "azurerm_network_security_rule" "azure_private_nsg_rule" {
   resource_group_name         = var.rg_azure_project1_name
   network_security_group_name = azurerm_network_security_group.azure_private_nsg.name
 }
+
+resource "azurerm_key_vault" "app_gateway_kv" {
+  name                = "azure-project1-kv"
+  location            = var.rg_azure_project1_location
+  resource_group_name = var.rg_azure_project1_name
+  tenant_id           = var.tenant_id
+
+  sku_name = "standard"
+
+  rbac_authorization_enabled = true
+
+  soft_delete_retention_days = 7
+  purge_protection_enabled    = true
+}
+
