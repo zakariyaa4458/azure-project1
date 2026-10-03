@@ -58,6 +58,10 @@ resource "azurerm_container_app" "azure_flask_app" {
     ]
   }
 
+   depends_on = [
+    var.acr_pull_role_assignment
+  ]
+
 }
 
 resource "azurerm_container_app_environment" "azure_flask_container_app_environment" {
