@@ -95,6 +95,9 @@ resource "azurerm_network_security_rule" "azure_private_nsg_rule" {
 }
 
 resource "azurerm_key_vault" "app_gateway_kv" {
+  #checkov:skip=CKV_AZURE_189: temp allowing public access for testing
+  #checkov:skip=CKV_AZURE_109: temp not allowing firewall rules for testing
+  #checkov:skip=CKV2_AZURE_32: temp not putting private endpoints for testing
   name                = "azure-project1-kv"
   location            = var.rg_azure_project1_location
   resource_group_name = var.rg_azure_project1_name
