@@ -7,7 +7,9 @@ This includes Infrastructure as Code, CI/CD, container security scanning, privat
 
 ---
 
-## Project Structure 
+## Project Structure
+
+```Text
 |-- app
 |   |-- Dockerfile
 |   |-- app.py
@@ -47,7 +49,12 @@ This includes Infrastructure as Code, CI/CD, container security scanning, privat
     |-- terraform.tfvars
     `-- variable.tf
 
+```
 ---
+
+## App Image
+<img width="1917" height="1092" alt="image" src="https://github.com/user-attachments/assets/8fac7d37-9e6c-4c60-a188-cca924cb888f" />
+
 
 ## Architecture
 
@@ -276,18 +283,6 @@ One issue involved Azure Container Apps failing to resolve Azure Container Regis
 
 Another issue involved Application Gateway infrastructure traffic. Application Gateway v2 requires traffic from `GatewayManager` on specific high ports. The gateway initially failed to provision because the NSG did not allow this traffic.
 
-There were also several challenges around managed identities and Azure RBAC. In particular, Azure resources often expose both an identity resource ID and a principal ID:
-
-```text
-.id
-    -> Azure resource ID
-
-.principal_id
-    -> Microsoft Entra principal GUID
-```
-
-Using the wrong one for an RBAC role assignment caused permission failures until the correct principal ID was used.
-
 The Application Gateway also initially failed to retrieve its certificate from Key Vault because the Key Vault role had been assigned to the Container App identity rather than the Application Gateway identity.
 
 Finally, although Azure reported the original Application Gateway configuration as successfully provisioned, TCP connections to its HTTPS listener on port 443 continued to time out. After validating the listener, NSG, routing rules, public IP, backend health and Key Vault configuration, the gateway was recreated from the corrected Terraform configuration. The new gateway successfully accepted HTTPS traffic.
@@ -333,7 +328,7 @@ Other potential improvements include:
 
 ## What I Learned
 
-This project gave me a much better understanding of how different parts of a cloud platform interact.
+This project gave me a much better understanding of how Azure works and how its different services integrate with each other. Building the infrastructure from the ground up helped me become more familiar with Azure networking, identity and access management, Container Apps, Application Gateway, Key Vault and monitoring. More importantly, troubleshooting issues between these services helped me understand how Azure resources work together as part of a complete cloud environment rather than as individual components.
 
 Provisioning individual Azure resources with Terraform was only one part of the challenge. A lot of the learning came from understanding why resources could be healthy individually while the complete request path still failed.
 
