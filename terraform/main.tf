@@ -21,7 +21,7 @@ module "networking" {
   container_app_fqdn              = module.app.container_app_fqdn
   app_gateway_kv_id               = module.security.app_gateway_kv_id
   key_vault_secret_id             = var.key_vault_secret_id
- application_gateway_identity_id = module.app.application_gateway_identity_id
+  application_gateway_identity_id = module.app.application_gateway_identity_id
 
 
 
@@ -44,17 +44,18 @@ module "logs" {
   rg_azure_project1_name     = module.networking.rg_azure_project1_name
   rg_azure_project1_location = module.networking.rg_azure_project1_location
   vnet_id                    = module.networking.vnet_id
+  azure_app_gateway_id       = module.networking.azure_app_gateway_id
 }
 
 module "acr" {
-  source                          = "./modules/acr"
-  rg_azure_project1_name          = module.networking.rg_azure_project1_name
-  rg_azure_project1_location      = module.networking.rg_azure_project1_location
-  vnet_id                         = module.networking.vnet_id
-  container_app_principal_id      = module.app.container_app_principal_id
-  aca_identity_id                 = module.app.aca_identity_id
-  aca_identity_principal_id       = module.app.aca_identity_principal_id
-  app_gateway_kv_id               = module.security.app_gateway_kv_id
+  source                                    = "./modules/acr"
+  rg_azure_project1_name                    = module.networking.rg_azure_project1_name
+  rg_azure_project1_location                = module.networking.rg_azure_project1_location
+  vnet_id                                   = module.networking.vnet_id
+  container_app_principal_id                = module.app.container_app_principal_id
+  aca_identity_id                           = module.app.aca_identity_id
+  aca_identity_principal_id                 = module.app.aca_identity_principal_id
+  app_gateway_kv_id                         = module.security.app_gateway_kv_id
   application_gateway_identity_principal_id = module.app.application_gateway_identity_principal_id
 
 }
@@ -62,5 +63,6 @@ module "acr" {
 import {
   id = "/subscriptions/2930bc1b-5d66-43da-9d15-54c0b439b62c/resourceGroups/rg-azure-project1"
   to = module.networking.azurerm_resource_group.rg-azure-project1
+
 }
 

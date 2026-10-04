@@ -13,3 +13,9 @@ variable "rg_azure_project1_location" {
   description = "The location of the resource group where the virtual network is located."
   type        = string
 }
+
+variable "azure_app_gateway_id" {
+  description = "azure app gateway"
+  type = string
+  
+}

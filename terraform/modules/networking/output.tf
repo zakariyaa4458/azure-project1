@@ -21,3 +21,8 @@ output "app_gateway_subnet_id" {
 output "container_subnet_address_prefix" {
   value = azurerm_subnet.container_subnet.address_prefixes
 }
+
+output "azure_app_gateway_id" {
+  value = azurerm_application_gateway.azure_app_gateway.id
+  
+}
